@@ -38,10 +38,22 @@ void bubbleSort(std::vector<int>& list) {
     }
 }
 
-//std::vector<int> merge(std::vector<int>& list1, std::vector<int>& list2) {
-//    bool startList1 = false;
-    //if (list1.at(i)) {}
-//}
+/*
+
+basically split, then split, then split
+then from there, return merge, return merge, and finally
+return a merged list
+
+in mergeSort
+split "lower" and mergeSort
+split "upper" and mergeSort
+unless it cant be split...then you would return mergeSort(lower, upper)
+
+in merge
+cur1 = list1[0], cur2 = list2[0], vec = new vec
+and while the vecsize does not equal the combined size of both lists, we merge it into the vec, checking which value to put in
+
+*/
 
 void mergeSort(std::vector<int>& list) {
 
