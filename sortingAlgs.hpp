@@ -19,7 +19,9 @@ void selectionSort(std::vector<int>& list) {
 void insertionSort(std::vector<int>& list) {
     for (int i=1; i<list.size(); i++) {
         for (int j=i; ( (j>0) && (list.at(j)<list.at(j-1)) ); j--) { 
-            std::swap(list.at(j), list.at(j-1));
+            int temp = list.at(j);
+            list.at(j) = list.at(j-1);
+            list.at(j-1) = temp;
         }
     }
 }
@@ -34,4 +36,13 @@ void bubbleSort(std::vector<int>& list) {
             }
         }
     }
+}
+
+//std::vector<int> merge(std::vector<int>& list1, std::vector<int>& list2) {
+//    bool startList1 = false;
+    //if (list1.at(i)) {}
+//}
+
+void mergeSort(std::vector<int>& list) {
+
 }
