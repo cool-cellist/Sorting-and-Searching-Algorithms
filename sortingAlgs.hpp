@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <iostream>
+#include <functional>
 
 void selectionSort(std::vector<int>& list) {
     for (int i=0; i<list.size(); i++) {
@@ -38,23 +39,41 @@ void bubbleSort(std::vector<int>& list) {
     }
 }
 
-/*
+std::vector<int> merge(std::vector<int>& list1, std::vector<int>& list2) {
+    int cur1 = 0, cur2 = 0;  std::vector<int> constructedList;
+    while ((constructedList.size())!=(list1.size()+list2.size())) {
+        if (list1.at(cur1)<list2.at(cur2)) {
+            constructedList.push_back(list1.at(cur1));
+            cur1++;
+            if (cur1==list1.size()) {
+                constructedList.insert(constructedList.end(), list2.end()-(list2.size()-cur2), list2.end());
+                break;
+            }
+        } else {
+            constructedList.push_back(list2.at(cur2));
+            cur2++;
+            if (cur2==list2.size()) {
+                constructedList.insert(constructedList.end(), list1.end()-(list1.size()-cur1), list1.end());
+                break;
+            }
+        }
+    }
 
-basically split, then split, then split
-then from there, return merge, return merge, and finally
-return a merged list
+    return constructedList;
+}
 
-in mergeSort
-split "lower" and mergeSort
-split "upper" and mergeSort
-unless it cant be split...then you would return mergeSort(lower, upper)
+std::vector<int> mergeSort(std::vector<int>& list) {
+    if (list.size()==1) {
+        return list;
+    }
 
-in merge
-cur1 = list1[0], cur2 = list2[0], vec = new vec
-and while the vecsize does not equal the combined size of both lists, we merge it into the vec, checking which value to put in
+    size_t mid = list.size()/2;
+    std::vector<int> lowerhalf(list.begin(), list.begin()+mid);
+    std::vector<int> upperhalf(list.begin()+mid, list.end());
 
-*/
-
-void mergeSort(std::vector<int>& list) {
+    lowerhalf = mergeSort(lowerhalf);
+    upperhalf = mergeSort(upperhalf);
+    
+    return merge(lowerhalf, upperhalf);
 
 }
