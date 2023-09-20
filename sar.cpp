@@ -44,4 +44,12 @@ int main() {
     bubbleSort(list);
     //prints the time taken
     std::cout << "\nBUBBLE SORT MICROSECONDS: " << sp.duration() <<"\n\n";
+
+    //prints list
+    list = generateList(-100, 100, 1000);
+    //times the sorting algorithm
+    sp.restart();
+    list = mergeSort(list);
+    //prints the time taken
+    std::cout << "\nMERGE SORT MICROSECONDS: " << sp.duration() <<"\n\n";
 }
