@@ -15,41 +15,45 @@ class Stopwatch {
     }
 };
 
+Stopwatch sp = Stopwatch();
+int64_t testAlgo(void (*func)(std::vector<int>&), int items) {
+    std::vector<int> list = generateList(-100, 100, items);
+    sp.restart();
+    func(list);
+    return sp.duration();
+}
+
+int64_t testAlgo(std::vector<int> (*func)(std::vector<int>&), int items) {
+    std::vector<int> list = generateList(-100, 100, items);
+    sp.restart();
+    list = func(list);
+    return sp.duration();
+}
+
 int main() {
-    //prints list
-    Stopwatch sp = Stopwatch();
-    std::vector<int> list = generateList(-100, 100, 1000);
-    //times the sorting algorithm
-    sp.restart();
-    selectionSort(list);
-    //prints the time taken
-    std::cout << "\nSELECTION SORT MICROSECONDS: " << sp.duration() <<"\n\n";
+    int items[] = {100, 1000, 10000};
 
+    std::cout << "\nSELECTION SORT MICROSECONDS: ";
+    for (int i=0; i<3; i++) {
+        std::cout << testAlgo(selectionSort, items[i]) << ", ";
+    }
+    std::cout << "\n\n";
 
+    std::cout << "\nINSERTION SORT MICROSECONDS: ";
+    for (int i=0; i<3; i++) {
+        std::cout << testAlgo(insertionSort, items[i]) << ", ";
+    }
+    std::cout << "\n\n";
 
-    //prints list
-    list = generateList(-100, 100, 1000);
-    //times the sorting algorithm
-    sp.restart();
-    insertionSort(list);
-    //prints the time taken
-    std::cout << "\nINSERTION SORT MICROSECONDS: " << sp.duration() <<"\n\n";
+    std::cout << "\nBUBBLE SORT MICROSECONDS: ";
+    for (int i=0; i<3; i++) {
+        std::cout << testAlgo(bubbleSort, items[i]) << ", ";
+    }
+    std::cout << "\n\n";
 
-
-
-    //prints list
-    list = generateList(-100, 100, 1000);
-    //times the sorting algorithm
-    sp.restart();
-    bubbleSort(list);
-    //prints the time taken
-    std::cout << "\nBUBBLE SORT MICROSECONDS: " << sp.duration() <<"\n\n";
-
-    //prints list
-    list = generateList(-100, 100, 1000);
-    //times the sorting algorithm
-    sp.restart();
-    list = mergeSort(list);
-    //prints the time taken
-    std::cout << "\nMERGE SORT MICROSECONDS: " << sp.duration() <<"\n\n";
+    std::cout << "\nMERGE SORT MICROSECONDS: ";
+    for (int i=0; i<3; i++) {
+        std::cout << testAlgo(mergeSort, items[i]) << ", ";
+    }
+    std::cout << "\n\n";
 }
