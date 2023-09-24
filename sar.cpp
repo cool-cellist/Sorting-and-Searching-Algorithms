@@ -16,44 +16,60 @@ class Stopwatch {
 };
 
 Stopwatch sp = Stopwatch();
-int64_t testAlgo(void (*func)(std::vector<int>&), int items) {
+int64_t timeAlgo(void (*func)(std::vector<int>&), int items) {
     std::vector<int> list = generateList(-100, 100, items);
     sp.restart();
     func(list);
     return sp.duration();
 }
 
-int64_t testAlgo(std::vector<int> (*func)(std::vector<int>&), int items) {
+int64_t timeAlgo(std::vector<int> (*func)(std::vector<int>&), int items) {
     std::vector<int> list = generateList(-100, 100, items);
     sp.restart();
     list = func(list);
     return sp.duration();
 }
 
+int64_t timeAlgo(void (*func)(std::vector<int>&, int, int), int items) {
+    std::vector<int> list = generateList(-100, 100, items);
+    sp.restart();
+    func(list, 0, -1);
+    return sp.duration();
+} 
+
 int main() {
+
     int items[] = {100, 1000, 10000};
+    int tests = 3;
+
 
     std::cout << "\nSELECTION SORT MICROSECONDS: ";
-    for (int i=0; i<3; i++) {
-        std::cout << testAlgo(selectionSort, items[i]) << ", ";
+    for (int i=0; i<tests; i++) {
+        std::cout << timeAlgo(selectionSort, items[i]) << ", ";
     }
     std::cout << "\n\n";
 
     std::cout << "\nINSERTION SORT MICROSECONDS: ";
-    for (int i=0; i<3; i++) {
-        std::cout << testAlgo(insertionSort, items[i]) << ", ";
+    for (int i=0; i<tests; i++) {
+        std::cout << timeAlgo(insertionSort, items[i]) << ", ";
     }
     std::cout << "\n\n";
 
     std::cout << "\nBUBBLE SORT MICROSECONDS: ";
-    for (int i=0; i<3; i++) {
-        std::cout << testAlgo(bubbleSort, items[i]) << ", ";
+    for (int i=0; i<tests; i++) {
+        std::cout << timeAlgo(bubbleSort, items[i]) << ", ";
     }
     std::cout << "\n\n";
 
     std::cout << "\nMERGE SORT MICROSECONDS: ";
-    for (int i=0; i<3; i++) {
-        std::cout << testAlgo(mergeSort, items[i]) << ", ";
+    for (int i=0; i<tests; i++) {
+        std::cout << timeAlgo(mergeSort, items[i]) << ", ";
+    }
+    std::cout << "\n\n";
+
+    std::cout << "\nQUICK SORT MICROSECONDS: ";
+    for (int i=0; i<tests; i++) {
+        std::cout << timeAlgo(quickSort, items[i]) << ", ";
     }
     std::cout << "\n\n";
 }
