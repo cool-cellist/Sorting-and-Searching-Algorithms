@@ -42,7 +42,6 @@ int main() {
     int items[] = {100, 1000, 10000};
     int tests = 3;
 
-
     std::cout << "\nSELECTION SORT MICROSECONDS: ";
     for (int i=0; i<tests; i++) {
         std::cout << timeAlgo(selectionSort, items[i]) << ", ";
@@ -70,6 +69,12 @@ int main() {
     std::cout << "\nQUICK SORT MICROSECONDS: ";
     for (int i=0; i<tests; i++) {
         std::cout << timeAlgo(quickSort, items[i]) << ", ";
+    }
+    std::cout << "\n\n";
+
+    std::cout << "\nHEAP SORT MICROSECONDS: ";
+    for (int i=0; i<tests; i++) {
+        std::cout << timeAlgo(heapSort, items[i]) << ", ";
     }
     std::cout << "\n\n";
 }
