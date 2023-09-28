@@ -109,3 +109,38 @@ void quickSort(std::vector<int>& list, int low=0, int high=-1) {
     quickSort(list, low, pivotIndex-1);
     quickSort(list, pivotIndex+1, high);
 }
+
+void heapify(std::vector<int>& list, int size, int index) {
+    int leftIndex = (index*2)+1;
+    int rightIndex = (index*2)+2;
+
+    int largestNode = index;
+    int temp = 0;
+
+    if (leftIndex < size && list.at(leftIndex) > list.at(largestNode)) {
+        largestNode=leftIndex;}
+    if (rightIndex < size && list.at(rightIndex) > list.at(largestNode)) {
+        largestNode=rightIndex;}
+
+    if (largestNode!=index) {
+        temp = list.at(index);
+        list.at(index) = list.at(largestNode);
+        list.at(largestNode) = temp;
+
+        heapify(list, size, largestNode);
+    }
+}
+
+void heapSort(std::vector<int>& list) {
+    int temp = 0;
+    for (int i=(list.size()/2)-1; i>=0; i--) {
+        heapify(list, list.size(), i);
+    }
+    for (int i=list.size()-1; i>=0; i--) {
+        temp = list.at(0);
+        list.at(0) = list.at(i);
+        list.at(i) = temp;
+
+        heapify(list, i, 0);
+    }
+}
