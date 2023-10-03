@@ -8,13 +8,16 @@ class Stopwatch {
     std::chrono::_V2::steady_clock::time_point start = std::chrono::steady_clock::now();
 
     public:
-    void restart() {
-        start = std::chrono::steady_clock::now();
-    }
+    void restart() {start = std::chrono::steady_clock::now();}
+    int64_t duration() {return std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now()-start).count();}
+};
 
-    int64_t duration() {
-        return std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now()-start).count();
-    }
+class nanoStopwatch {
+    std::chrono::_V2::steady_clock::time_point start = std::chrono::steady_clock::now();
+
+    public:
+    void restart() {start = std::chrono::steady_clock::now();}
+    int64_t duration() {return std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::steady_clock::now()-start).count();}
 };
 
 
@@ -44,19 +47,6 @@ std::vector<int> generateOrderedIncrementedSet(int min, int max, int increment) 
 
     for (int i=min; i<=max; i+=increment) {
         list.push_back(i);
-    }
-
-    return list;
-}
-
-std::vector<int> generateOrderedSet(int items, int minIncre, int maxIncre) {
-    std::vector<int> list;
-
-    engine.seed(_rdtsc());
-    std::uniform_int_distribution<> generator(minIncre, maxIncre);
-
-    for (int i=0; i<=items; i++) {
-        list.push_back(generator(engine));
     }
 
     return list;
