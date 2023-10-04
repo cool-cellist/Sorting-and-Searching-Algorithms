@@ -1,4 +1,5 @@
 #include <vector>
+#include <cmath>
 
 int linearSearch(std::vector<int>& list, int target) {
   for (int i=0; i<list.size(); i++) {
@@ -52,4 +53,34 @@ int ternarySearch(std::vector<int>& list, int target) {
   }
 
   return -1;
+}
+
+int exponentialSearch(std::vector<int>& list, int target) {
+  if (list.at(0)==target) {return 0;}
+
+  int i = 1;
+  while (i<list.size() && list.at(i)<target) {i *= 2;}
+
+  int left=i/2, right = (i>list.size()-1 ? list.size() : i);
+  int middle = 0;
+
+  while (left<=right) {
+    middle = (left+right)/2;
+    if (list.at(middle)==target) {return middle;}
+    else if (list.at(middle)>target) {right=middle-1;}
+    else {left=middle+1;}
+  }
+
+  return -1;
+}
+
+int jumpSearch(std::vector<int>& list, int target) {
+  int root = (int)sqrt((double)list.size());
+
+  int i = 0;
+  while (i<list.size() && list.at(i)<target) {i+=root;}
+  
+  for (i-=root; i<i+root; i++) {
+    if (list.at(i)==target) {return i;}
+  } return -1;
 }
