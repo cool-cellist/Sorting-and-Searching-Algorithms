@@ -9,10 +9,7 @@ int64_t timeAlgo(int (*func)(std::vector<int>&, int), int items, bool needsSorte
     list.push_back(101);
     if (needsSorted==true) {heapSort(list);}
     sp.restart();
-    int index = func(list, 101);
-    
-    //if (index>-1) {std::cout << "INDEX: " << index << " ";}
-
+    func(list, 101);
     return sp.duration();
 }
 
@@ -30,5 +27,13 @@ int main() {
 
     std::cout << "TERNARY SEARCH MICROSECONDS: ";
     for (int i=0; i<tests; i++) {std::cout << timeAlgo(ternarySearch, items[i], true) << ", ";}
+    std::cout << "\n\n";
+
+    std::cout << "EXPONENTIAL SEARCH MICROSECONDS: ";
+    for (int i=0; i<tests; i++) {std::cout << timeAlgo(exponentialSearch, items[i], true) << ", ";}
+    std::cout << "\n\n";
+
+    std::cout << "JUMP SEARCH MICROSECONDS: ";
+    for (int i=0; i<tests; i++) {std::cout << timeAlgo(jumpSearch, items[i], true) << ", ";}
     std::cout << "\n\n";
 }
