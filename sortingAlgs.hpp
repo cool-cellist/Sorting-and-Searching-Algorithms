@@ -66,7 +66,7 @@ std::vector<int> merge(std::vector<int>& list1, std::vector<int>& list2) {
 }
 
 std::vector<int> mergeSort(std::vector<int>& list) {
-    if (list.size()==1) {
+    if (list.size()<=1) {
         return list;
     }
 
